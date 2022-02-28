@@ -19,12 +19,12 @@ module.exports = [
   ],
   ['meta', { name: 'theme-color', content: '#11a8cd' }], // 移动浏览器主题颜色
 
-  ['script', { src: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js' }],
-  ['script', { src: 'https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js' }],
-  ['script', { src: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js' }],
-  ['script', { src: 'https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js' }],
+  // ['script', { src: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js' }],
+  // ['script', { src: 'https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js' }],
+  // ['script', { src: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js' }],
+  // ['script', { src: 'https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js' }],
   ['script', { src: 'https://cdn.jsdelivr.net/npm/twikoo@1.4.18/dist/twikoo.all.min.js' }],
-  
+
   // 百度统计 js
   ['script', {}, baidutj],
 

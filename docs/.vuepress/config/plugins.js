@@ -8,10 +8,10 @@ module.exports = [
     }
   ],
   // 本地插件
-  [require('../plugins/love-me'), { // 鼠标点击爱心特效
-    // color: '#11a8cd', // 爱心颜色，默认随机色
-    excludeClassName: 'theme-vdoing-content' // 要排除元素的class, 默认空''
-  }],
+  // [require('../plugins/love-me'), { // 鼠标点击爱心特效
+  //   // color: '#11a8cd', // 爱心颜色，默认随机色
+  //   excludeClassName: 'theme-vdoing-content' // 要排除元素的class, 默认空''
+  // }],
 
   'vuepress-plugin-baidu-autopush', // 百度自动推送
 
@@ -58,20 +58,20 @@ module.exports = [
       showInMobile: false, // whether to display on the mobile side, default: false.
     },
   ],
-  [
-    'demo-block',
-    {
-      // demo演示模块 https://github.com/xiguaxigua/vuepress-plugin-demo-block
-      settings: {
-        // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
-        // cssLib: ['http://xxx'], // 在线示例中的css依赖
-        // vue: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js', // 在线示例中的vue依赖
-        jsfiddle: false, // 是否显示 jsfiddle 链接
-        codepen: true, // 是否显示 codepen 链接
-        horizontal: false, // 是否展示为横向样式
-      },
-    },
-  ],
+  // [
+  //   'demo-block',
+  //   {
+  //     // demo演示模块 https://github.com/xiguaxigua/vuepress-plugin-demo-block
+  //     settings: {
+  //       // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
+  //       // cssLib: ['http://xxx'], // 在线示例中的css依赖
+  //       // vue: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js', // 在线示例中的vue依赖
+  //       jsfiddle: false, // 是否显示 jsfiddle 链接
+  //       codepen: true, // 是否显示 codepen 链接
+  //       horizontal: false, // 是否展示为横向样式
+  //     },
+  //   },
+  // ],
   [
     'vuepress-plugin-zooming', // 放大图片
     {
@@ -174,14 +174,14 @@ module.exports = [
     },
   ],
   // 鼠标点击页面的爆炸效果，官网：https://moefyit.github.io/moefy-vuepress/packages/cursor-effects.html
-  [
-    'cursor-effects',
-    {
-      size: 2, // 粒子的大小，默认值：2
-      shape: ['star'], // 粒子的形状，star：星形，circle：圆形。默认值：star
-      zIndex: 999999999, // 页面的索引属性，默认值：99999999，
-    },
-  ],
+  // [
+  //   'cursor-effects',
+  //   {
+  //     size: 2, // 粒子的大小，默认值：2
+  //     shape: ['star'], // 粒子的形状，star：星形，circle：圆形。默认值：star
+  //     zIndex: 999999999, // 页面的索引属性，默认值：99999999，
+  //   },
+  // ],
   // 动态标题，官网：https://moefyit.github.io/moefy-vuepress/packages/dynamic-title.html
   [
     'dynamic-title',
