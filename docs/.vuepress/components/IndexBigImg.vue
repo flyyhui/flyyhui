@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div class="index-bigimg" style="display: none"></div>
+</template>
 <script>
 // 两个变量分别是背景元素的 class、生成的箭头 class
 const banner = "banner";

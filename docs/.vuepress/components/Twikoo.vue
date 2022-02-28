@@ -2,25 +2,52 @@
   <div id="tcomment"></div>
 </template>
 <script>
+let waitTime = 700; // 页面加载后多少毫秒后加载评论区（如果是 0ms，可能会报错）
+let archives = "/archives/"; // 归档页的 permalink
 export default {
+  data() {
+    return {
+      twikoo: "",
+      firstLoad: true,
+    };
+  },
   mounted() {
-    if (this.$route.path != "/") {
+    // 不初始化评论区的页面：frontmatter 的 comment 为 false 的文章页、首页、归档页
+    if (
+      (this.$frontmatter.comment == undefined || this.$frontmatter.comment) &&
+      this.$route.path != "/" &&
+      this.$route.path != archives
+    ) {
       setTimeout(() => {
         this.twikooInit();
-      }, 1000);
+      }, waitTime);
     }
   },
   watch: {
     $route(to, from) {
-      if(to.path == "/"){
-        return;
-      }else if (from.path == "/") {
-        this.twikooInit();
-      } else if (this.$route.path != "/" && this.$route.hash == "") {
-        setTimeout(() => {
-          this.updateComment();
-        }, 1000);
-      }
+      debugger;
+        // 初始化评论条件：来自首页，来自归档页、来自 frontmatter 的 comment 为 false 的文章页
+        if(to.path == "/"){
+          return
+        }
+        if (
+          from.path == "/" ||
+          from.path == archives ||
+          this.getCommentByFrontmatter(from) == undefined ||
+          this.getCommentByFrontmatter(from)
+        ) {
+          this.firstLoad
+            ? setTimeout(() => {
+                this.twikooInit();
+                this.firstLoad = false;
+              }, waitTime)
+            : this.twikooInit(); // 如果加载过一次评论区，则直接获取
+        } else if (this.$route.path != "/" && this.$route.hash == "") {
+          // 文章页之间跳转，重新获取评论
+          setTimeout(() => {
+            this.updateComment();
+          }, waitTime);
+        }
     },
   },
   methods: {
@@ -37,14 +64,31 @@ export default {
           // },
         })
         .then(() => {
-          let page = document.getElementsByClassName("page")[0];
-          let comment = document.getElementById("twikoo");
-          page.appendChild(comment);
+          this.loadTwikoo();
         });
+    },
+    loadTwikoo() {
+      let page = document.getElementsByClassName("page")[0];
+      let comment = document.getElementById("twikoo");
+      // comment 不存在代表曾初始化过，后面被删除
+      comment ? (this.twikoo = comment) : (comment = this.twikoo);
+      page
+        ? comment
+          ? page.appendChild(comment)
+          : page.appendChild(this.twikoo)
+        : "";
+      this.updateComment();
     },
     updateComment() {
       let tk_icon = document.getElementsByClassName("tk-icon")[0];
       tk_icon ? tk_icon.click() : undefined;
+    },
+    getCommentByFrontmatter(from) {
+      this.$site.pages.forEach((item) => {
+        if (item.path == from.path) {
+          return item.frontmatter.comment;
+        }
+      });
     },
   },
 };
