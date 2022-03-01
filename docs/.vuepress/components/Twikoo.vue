@@ -25,28 +25,32 @@ export default {
   },
   watch: {
     $route(to, from) {
-        // 初始化评论条件：来自首页，来自归档页、来自 frontmatter 的 comment 为 false 的文章页
-        if(to.path == "/"){
-          return
-        }
-        if (
-          from.path == "/" ||
-          from.path == archives ||
-          this.getCommentByFrontmatter(from) == undefined ||
-          this.getCommentByFrontmatter(from)
-        ) {
-          this.firstLoad
-            ? setTimeout(() => {
-                this.twikooInit();
-                this.firstLoad = false;
-              }, waitTime)
-            : this.twikooInit(); // 如果加载过一次评论区，则直接获取
-        } else if (this.$route.path != "/" && this.$route.hash == "") {
-          // 文章页之间跳转，重新获取评论
-          setTimeout(() => {
-            this.updateComment();
-          }, waitTime);
-        }
+      // 初始化评论条件：来自首页，来自归档页、来自 frontmatter 的 comment 为 false 的文章页
+      if (
+        to.path == "/" ||
+        this.getCommentByFrontmatter(to) == undefined ||
+        this.getCommentByFrontmatter(to)
+      ) {
+        return;
+      }
+      if (
+        from.path == "/" ||
+        from.path == archives ||
+        this.getCommentByFrontmatter(from) == undefined ||
+        this.getCommentByFrontmatter(from)
+      ) {
+        this.firstLoad
+          ? setTimeout(() => {
+              this.twikooInit();
+              this.firstLoad = false;
+            }, waitTime)
+          : this.twikooInit(); // 如果加载过一次评论区，则直接获取
+      } else if (this.$route.path != "/" && this.$route.hash == "") {
+        // 文章页之间跳转，重新获取评论
+        setTimeout(() => {
+          this.updateComment();
+        }, waitTime);
+      }
     },
   },
   methods: {
