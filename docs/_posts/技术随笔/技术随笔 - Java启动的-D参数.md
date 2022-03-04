@@ -2,7 +2,8 @@
 title: 技术随笔 - Java启动的-D参数
 date: 2022-03-02 09:27:00
 permalink: /java/d/
-categories:
+sidebar: auto
+categories: 
   - 
 tags: 
   - 

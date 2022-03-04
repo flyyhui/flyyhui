@@ -12,7 +12,7 @@ export default {
     };
   },
   mounted() {
-    // 不初始化评论区的页面：frontmatter 的 comment 为 false 的文章页、首页、归档页
+    // 不初始化评论区的页面：frontmatter 的 comment: false 的文章页、首页、归档页
     if (
       (this.$frontmatter.comment == undefined || this.$frontmatter.comment) &&
       this.$route.path != "/" &&
@@ -25,19 +25,16 @@ export default {
   },
   watch: {
     $route(to, from) {
-      // 初始化评论条件：来自首页，来自归档页、来自 frontmatter 的 comment 为 false 的文章页
-      if (
-        to.path == "/" ||
-        this.getCommentByFrontmatter(to) == undefined ||
-        this.getCommentByFrontmatter(to)
-      ) {
+      // 进入首页、进入 frontmatter 的 comment: false 页面，删除评论区
+      if (to.path == "/" || this.getCommentByFrontmatter(to) == false) {
+        this.deleteComment();
         return;
       }
+      // 初始化评论条件：来自首页，来自归档页、来自 frontmatter 的 comment: true 的文章页
       if (
         from.path == "/" ||
         from.path == archives ||
-        this.getCommentByFrontmatter(from) == undefined ||
-        this.getCommentByFrontmatter(from)
+        !this.getCommentByFrontmatter(from)
       ) {
         this.firstLoad
           ? setTimeout(() => {
@@ -70,6 +67,7 @@ export default {
           this.loadTwikoo();
         });
     },
+    // 初始化加载或者跳转新页面重新加载 Twikoo 评论区
     loadTwikoo() {
       let page = document.getElementsByClassName("page")[0];
       let comment = document.getElementById("twikoo");
@@ -82,16 +80,25 @@ export default {
         : "";
       this.updateComment();
     },
+    // 跳转新页面，重新获取当前页面的评论信息
     updateComment() {
       let tk_icon = document.getElementsByClassName("tk-icon")[0];
       tk_icon ? tk_icon.click() : undefined;
     },
-    getCommentByFrontmatter(from) {
+    // 删除 frontmatter:comment: false 页面的数据
+    deleteComment() {
+      let comment = document.getElementById("twikoo");
+      comment ? comment.parentNode.removeChild(comment) : "";
+    },
+    // 获取 frontmatter 的 comment
+    getCommentByFrontmatter(route) {
+      let comment = true;
       this.$site.pages.forEach((item) => {
-        if (item.path == from.path) {
-          return item.frontmatter.comment;
+        if (item.path == route.path) {
+          comment = item.frontmatter.comment;
         }
       });
+      return comment;
     },
   },
 };
