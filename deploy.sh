@@ -10,22 +10,23 @@ npm run build
 cd docs/.vuepress/dist
 
 # 如果发布到自定义域名，请使用，不填则使用 GitHub 自带的 <username>.github.io
-echo 'github.notes.youngkbt.cn' > CNAME
+#echo 'flyyhui.github.io' > CNAME
 
 # 如果手运行该脚本，则执行 if 里的，如果是 GitHub 自动执行该脚本，则是 else 里的
 if [ -z "$GITHUB_TOKEN" ]; then
   msg='deploy'
-  githubUrl=git@github.com:Kele-Bingtang/Kele-Bingtang.github.io.git
+  #githubUrl=git@github.com:Kele-Bingtang/Kele-Bingtang.github.io.git
+  githubUrl=git@flyyhui:flyyhui/flyyhui.git
 else
   msg='来自 Github actions 的自动部署'
-  githubUrl=https://Kele-Bingtang:${GITHUB_TOKEN}@github.com/Kele-Bingtang/Kele-Bingtang.github.io.git
-  git config --global user.name "Kele_Bingtang"
-  git config --global user.email "2456019588@qq.com"
+  githubUrl=https://flyyhui:${GITHUB_TOKEN}@flyyhui/flyyhui/flyyhui.git
+  git config --global user.name "flyyhui"
+  git config --global user.email "flyyhui@qq.com"
 fi
 git init
 git add -A
 git commit -m "${msg}"
-git push -f $githubUrl master:gh-pages # 推送到 Github gh-pages 分支
+git push -f $githubUrl main:gh-pages # 推送到 Github gh-pages 分支
 
 # deploy to coding pages
 # echo 'www.YoungKbt.cn\YoungKbt.cn' > CNAME  # 自定义域名
@@ -43,4 +44,4 @@ git push -f $githubUrl master:gh-pages # 推送到 Github gh-pages 分支
 # 退回开始所在目录
 cd - 
 # 删除打包项目
-rm -rf docs/.vuepress/dist
+#rm -rf docs/.vuepress/dist

@@ -1,4 +1,4 @@
-const baidutj = require("../common/baidutj.js");
+//const baidutj = require("../common/baidutj.js");
 
 // head
 module.exports = [
@@ -28,7 +28,7 @@ module.exports = [
   ['script', { src: 'https://cdn.jsdelivr.net/npm/twikoo@1.4.18/dist/twikoo.all.min.js' }],
 
   // 百度统计 js
-  ['script', {}, baidutj],
+  //['script', {}, baidutj],
 
   /*  [
      'script',
