@@ -8,7 +8,7 @@ GITHUB_REPO=git@flyyhui:flyyhui/flyyhui.git
 comment=$1
 
 if [ ! $comment ]; then
-comment="更新内容 + Action 自动部署"
+comment="更新内容 + Action 自动部署1"
 fi
 
 git init 
